@@ -23,7 +23,13 @@ export class ApiService {
     this.objects$.next(this.objects)
   }
 
-  deleteObject(){
-
+  deleteObject(id){
+    console.log(id)
+    this.objects.forEach((object, index)=>{
+      if(object.id == id){
+        this.objects.splice(index,1)
+      }
+    })
+    this.objects$.next(this.objects)
   }
 }

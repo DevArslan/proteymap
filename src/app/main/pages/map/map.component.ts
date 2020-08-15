@@ -22,11 +22,15 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
       .addTo(mapElement);
 
+    var markersLayer = L.layerGroup()
+      .addTo(mapElement);
+
     this.API.objects$.subscribe((objects) => {
       console.log(objects)
+      markersLayer.clearLayers();
       this.objects = objects
       this.objects.forEach((object) => {
-        var marker = L.marker([object.x, object.y]).addTo(mapElement);
+        var marker = L.marker([object.x, object.y]).addTo(markersLayer);
         marker.bindPopup(object.title)
       })
     })

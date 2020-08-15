@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ApiService } from "../../../shared/api.service";
 
 @Component({
   selector: 'app-map-objects',
@@ -9,12 +10,11 @@ export class MapObjectsComponent implements OnInit {
 
   @Input() objects: any[] = []
 
-  constructor() { }
+  constructor(private API: ApiService) { }
 
-  delete(event){
-    const objectId = event.target.parentElement.dataset.id
-    this.objects.forEach((object)=>{
-    })
+  delete(event) {
+    const objectId = event.target.parentElement.parentElement.dataset.id
+    this.API.deleteObject(objectId)
   }
 
   ngOnInit(): void {
