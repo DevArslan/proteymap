@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="objects">
+        <div class="objects-table">
+            <table class="table-wrapper" cellspacing="0" cellpadding="0" style="border: none;">
+                <tr style="border: none;">
+                    <td style="border: none;">
+                        <table class="table-header" cellspacing="0" cellpadding="1">
+                            <col width="50%">
+                            <col width="25%">
+                            <col width="25%">
+                            <tr>
+                                <th>Название</th>
+                                <th>Координата x</th>
+                                <th>Координата y</th>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr style="border: none;">
+                    <td style="border: none; padding: 0;">
+                        <div class="table-body">
+                            <table cellspacing="0" cellpadding="1">
+                                <col width="50%">
+                                <col width="25%">
+                                <col width="25%">
+                                <tbody>
+                                    <tr *ngFor="let object of objects"  attr.data-x={{object.x}}>
+                                        <td>{{object.title}}</td>
+                                        <td>{{object.x}}</td>
+                                        <td>{{object.y}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

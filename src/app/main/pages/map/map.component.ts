@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { map, control, tileLayer } from "leaflet";
+import L from "leaflet";
+import { ApiService } from "../../shared/api.service";
+import "leaflet/dist/images/marker-shadow.png";
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -7,19 +10,38 @@ import { map, control, tileLayer } from "leaflet";
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  objects: { 'title': string, 'x': number, 'y': number }[] = [
+    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
+    { 'title': 'Второе место', 'x': 51.505, 'y': -0.11 },
+    { 'title': 'Третье место', 'x': 51.505, 'y': -0.15 },
+    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
+    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
+    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
+    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 }]
+
+  constructor(private API: ApiService) { }
 
   ngOnInit(): void {
-    const mapElement = map('map', { zoomControl: false })
+
+    const mapElement = L.map('map')
       .setView([51.505, -0.09], 13);
 
-    tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png')
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
       .addTo(mapElement);
-    const zoom = control.zoom({ position: "topright" });
-    zoom.addTo(mapElement);
 
-    const scale = control.scale({ position: "bottomright" });
-    scale.addTo(mapElement);
+    this.objects.forEach((object) => {
+      var marker = L.marker([object.x, object.y]).addTo(mapElement);
+      marker.bindPopup(object.title)
+    })
+
+    this.API.objects$.subscribe((objects) => {
+      this.objects = objects
+
+      this.objects.forEach((object) => {
+        var marker = marker([object.x, object.y]).addTo(mapElement);
+        marker.bindPopup(object.title)
+      })
+    })
+
   }
-
 }

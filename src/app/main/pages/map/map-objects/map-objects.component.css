@@ -1,0 +1,13 @@
+table {
+    width: 100%;
+}
+.table-wrapper {
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+.table-body {
+    overflow-y: scroll;
+    max-height: 10vh;
+    border: none;
+}
