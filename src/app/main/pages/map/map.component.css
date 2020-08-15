@@ -1,12 +1,13 @@
 .wrapper{
     display: flex;
-    width: 90%;
+    justify-content: space-around;
+    padding: 1%;
 }
 .objects{
-    width: 50%;
+    width: 45%;
 }
 .map{
-    width: 50%;
+    width: 45%;
     height: 50vh;
 }
 #map{

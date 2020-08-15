@@ -5,9 +5,20 @@ table {
     border-collapse: collapse;
     border: 1px solid #ccc;
     text-align: center;
+    font-size: 1.1rem;
 }
 .table-body {
     overflow-y: scroll;
-    max-height: 10vh;
+    max-height: 15vh;
     border: none;
+    text-align: center;
+}
+.delete{
+    text-align: center;
+    background-image: url('src/assets/icons/delete-24px.svg');
+    background-size: contain;
+    height: 1.1rem;
+    width: 1rem;
+    display: inline-block;
+    cursor: pointer;
 }

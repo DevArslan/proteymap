@@ -10,14 +10,7 @@ import "leaflet/dist/images/marker-shadow.png";
 })
 export class MapComponent implements OnInit {
 
-  objects: { 'title': string, 'x': number, 'y': number }[] = [
-    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'title': 'Второе место', 'x': 51.505, 'y': -0.11 },
-    { 'title': 'Третье место', 'x': 51.505, 'y': -0.15 },
-    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'title': 'Первое место', 'x': 51.505, 'y': -0.09 }]
+  objects: { 'id': number, 'title': string, 'x': number, 'y': number }[] = []
 
   constructor(private API: ApiService) { }
 
@@ -29,19 +22,16 @@ export class MapComponent implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
       .addTo(mapElement);
 
-    this.objects.forEach((object) => {
-      var marker = L.marker([object.x, object.y]).addTo(mapElement);
-      marker.bindPopup(object.title)
-    })
-
     this.API.objects$.subscribe((objects) => {
+      console.log(objects)
       this.objects = objects
-
       this.objects.forEach((object) => {
-        var marker = marker([object.x, object.y]).addTo(mapElement);
+        var marker = L.marker([object.x, object.y]).addTo(mapElement);
         marker.bindPopup(object.title)
       })
     })
+
+    this.API.getObjects()
 
   }
 }

@@ -11,6 +11,12 @@ export class MapObjectsComponent implements OnInit {
 
   constructor() { }
 
+  delete(event){
+    const objectId = event.target.parentElement.dataset.id
+    this.objects.forEach((object)=>{
+    })
+  }
+
   ngOnInit(): void {
     console.log(this.objects)
   }

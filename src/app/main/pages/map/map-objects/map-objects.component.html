@@ -5,13 +5,15 @@
                 <tr style="border: none;">
                     <td style="border: none;">
                         <table class="table-header" cellspacing="0" cellpadding="1">
-                            <col width="50%">
+                            <col width="25%">
+                            <col width="25%">
                             <col width="25%">
                             <col width="25%">
                             <tr>
                                 <th>Название</th>
                                 <th>Координата x</th>
                                 <th>Координата y</th>
+                                <th>Удалить</th>
                             </tr>
                         </table>
                     </td>
@@ -20,14 +22,16 @@
                     <td style="border: none; padding: 0;">
                         <div class="table-body">
                             <table cellspacing="0" cellpadding="1">
-                                <col width="50%">
+                                <col width="25%">
+                                <col width="25%">
                                 <col width="25%">
                                 <col width="25%">
                                 <tbody>
-                                    <tr *ngFor="let object of objects"  attr.data-x={{object.x}}>
+                                    <tr *ngFor="let object of objects"  attr.data-x={{object.x}} attr.data-id={{object.id}}>
                                         <td>{{object.title}}</td>
                                         <td>{{object.x}}</td>
                                         <td>{{object.y}}</td>
+                                        <td><i class="delete" (click)="delete($event)"></i></td>
                                     </tr>
                                 </tbody>
                             </table>
