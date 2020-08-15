@@ -27,7 +27,8 @@
                                 <col width="25%">
                                 <col width="25%">
                                 <tbody>
-                                    <tr *ngFor="let object of objects"  attr.data-x={{object.x}} attr.data-id={{object.id}}>
+                                    <tr *ngFor="let object of objects" attr.data-x={{object.x}}
+                                        attr.data-id={{object.id}}>
                                         <td>{{object.title}}</td>
                                         <td>{{object.x}}</td>
                                         <td>{{object.y}}</td>
@@ -40,5 +41,6 @@
                 </tr>
             </table>
         </div>
+        <button (click)="create()">Добавить объект</button>
     </div>
 </div>
