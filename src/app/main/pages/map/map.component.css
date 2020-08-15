@@ -1,0 +1,10 @@
+.wrapper{
+    display: flex;
+    width: 90%;
+}
+.objects{
+    width: 50%;
+}
+.map{
+    width: 50%;
+}
