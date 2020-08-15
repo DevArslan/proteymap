@@ -1,0 +1,15 @@
+<div class="wrapper" [hidden]="!data.state">
+    <div class="modal">
+        <div class="modal-header">
+            {{data.title}}
+        </div>
+        <div class="modal-body">
+            <form action="create()">
+                <input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title">
+                <input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude">
+                <input type="text" name="longitude" placeholder="Долгота" [(ngModel)]="longitude">
+                <input type="submit" value="" (click)="create()">
+            </form>
+        </div>
+    </div>
+</div>

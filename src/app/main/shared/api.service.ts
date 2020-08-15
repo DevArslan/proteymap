@@ -6,14 +6,14 @@ import { Subject } from 'rxjs';
 })
 export class ApiService {
   
-  objects: { 'id': number, 'title': string, 'x': number, 'y': number }[] = [
-    { 'id': 1, 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'id': 2, 'title': 'Второе место', 'x': 51.505, 'y': -0.11 },
-    { 'id': 3, 'title': 'Третье место', 'x': 51.505, 'y': -0.15 },
-    { 'id': 4, 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'id': 5, 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'id': 6, 'title': 'Первое место', 'x': 51.505, 'y': -0.09 },
-    { 'id': 7, 'title': 'Первое место', 'x': 51.505, 'y': -0.09 }]
+  objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = [
+    { 'id': 1, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
+    { 'id': 2, 'title': 'Второе место', 'latitude': 51.505, 'longitude': -0.11 },
+    { 'id': 3, 'title': 'Третье место', 'latitude': 51.505, 'longitude': -0.15 },
+    { 'id': 4, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
+    { 'id': 5, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
+    { 'id': 6, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
+    { 'id': 7, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 }]
 
   objects$ = new Subject<any>()
 
@@ -30,6 +30,17 @@ export class ApiService {
         this.objects.splice(index,1)
       }
     })
+    this.objects$.next(this.objects)
+  }
+
+  createObject(data){
+    const object = {
+        id: (this.objects.length + 1),
+        title: data.title,
+        latitude: data.latitude,
+        longitude: data.longitude
+    }
+    this.objects.push(object)
     this.objects$.next(this.objects)
   }
 }
