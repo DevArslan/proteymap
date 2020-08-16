@@ -6,18 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ObjectsFilterPipe implements PipeTransform {
 
   transform(objects: any, title: any): any {
+    if (title === "") return objects;
     
     return objects.filter(function(object) {
-      console.log(object)
-      if (title === "") return true;
-      else {
-        try {
-          return (
-            object.title.toUpperCase().indexOf(title.toUpperCase()) > -1
-          );
-        } catch (error) {
+      try {
+        return (
+          object.title.toUpperCase().indexOf(title.toUpperCase()) > -1
+        );
+      } catch (error) {
 
-        }
       }
     });
   }

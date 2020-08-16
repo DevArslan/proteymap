@@ -18,7 +18,7 @@ export class MapComponent implements OnInit {
 
   createObjectOnMap(event) {
     const coordinates = event.latlng
-    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: {coordinates} })
+    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: { coordinates } })
   }
 
   ngOnInit(): void {
@@ -34,14 +34,16 @@ export class MapComponent implements OnInit {
       .addTo(map);
 
     this.API.objects$.subscribe((objects) => {
-      console.log(objects)
       markersLayer.clearLayers();
       this.objects = objects
       this.objects.forEach((object) => {
         var marker = L.marker([object.latitude, object.longitude]).addTo(markersLayer);
-        marker.bindPopup(object.title)
+        // marker.bindPopup(object.title)
+        marker.bindPopup(`<div><p>${object.title}</p><button>Удалить</button></div>`)
       })
     })
+
+
 
     this.API.getObjects()
 
