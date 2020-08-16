@@ -1,14 +1,17 @@
 <div class="wrapper" [hidden]="!data.state">
     <div class="modal">
         <div class="modal-header">
-            {{data.title}}
+            <p>{{data.title}}</p>
+            <i class="close" (click)="close()"></i>
         </div>
         <div class="modal-body">
             <form action="create()">
-                <input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title">
-                <input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude">
-                <input type="text" name="longitude" placeholder="Долгота" [(ngModel)]="longitude">
-                <input type="submit" value="" (click)="create()">
+                <ul>
+                    <li><input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title"></li>
+                    <li><input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude"></li>
+                    <li><input type="text" name="longitude" placeholder="Долгота" [(ngModel)]="longitude"></li>
+                    <li><input type="submit" value="" (click)="create()"></li>
+                </ul>
             </form>
         </div>
     </div>

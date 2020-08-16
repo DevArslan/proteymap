@@ -18,7 +18,6 @@ export class MapComponent implements OnInit {
 
   createObjectOnMap(event) {
     const coordinates = event.latlng
-    console.log(coordinates)
     this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: {coordinates} })
   }
 

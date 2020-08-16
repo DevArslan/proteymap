@@ -9,7 +9,7 @@ import { ApiService } from "../../../shared/api.service";
 })
 export class ModalComponent implements OnInit {
 
-  data: { type: string, title: string, state: boolean, data: any } = { type: '', title: '', state: false, data: {} }
+  data: { type: string, title: string, state: boolean, data: any } = { type: '', title: '', state: false, data: { coordinates: { lat: 0, lng: 0 } } }
 
   title: string = ''
   latitude: number
@@ -17,20 +17,27 @@ export class ModalComponent implements OnInit {
 
   constructor(private modalService: ModalService, private API: ApiService) { }
 
-  create(){
+  close() {
+    this.title = ''
+    this.data = { type: '', title: '', state: false, data: { coordinates: { lat: 0, lng: 0 } } }
+    this.modalService.data$.next(this.data)
+  }
+
+  create() {
     const data = {
       title: this.title,
       latitude: this.latitude,
       longitude: this.longitude,
     }
     this.API.createObject(data)
+    this.close()
   }
 
   ngOnInit(): void {
     this.modalService.data$.subscribe((data) => {
       this.data = data
       this.latitude = data.data.coordinates.lat
-      this.longitude =  data.data.coordinates.lng
+      this.longitude = data.data.coordinates.lng
     })
   }
 
