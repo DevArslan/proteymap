@@ -7,6 +7,8 @@
     width: 45%;
 }
 .map{
+    overflow: hidden;
+    border-radius: 5px;
     width: 45%;
     height: 50vh;
 }

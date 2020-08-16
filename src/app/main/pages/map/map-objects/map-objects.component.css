@@ -1,24 +1,68 @@
+.objects-table {
+    margin-top: 2rem;
+}
 table {
     width: 100%;
+    border-collapse: collapse;
 }
 .table-wrapper {
     border-collapse: collapse;
     border: 1px solid #ccc;
-    text-align: center;
+    text-align: left;
     font-size: 1.1rem;
+}
+.table-header tr :nth-child(4) {
+    text-align: center;
 }
 .table-body {
     overflow-y: scroll;
     max-height: 15vh;
     border: none;
+}
+.row {
+    border-bottom: 1px solid #ccc !important;
+}
+.row td {
+    padding: 0.5rem 0;
+}
+.row :nth-child(4) {
     text-align: center;
 }
-.delete{
+.delete {
     text-align: center;
-    background-image: url('src/assets/icons/delete-24px.svg');
+    background-image: url("src/assets/icons/delete-24px.svg");
     background-size: contain;
     height: 1.1rem;
     width: 1rem;
     display: inline-block;
     cursor: pointer;
+}
+.filter-input {
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-image: url("src/assets/icons/search-24px.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: right;
+}
+.create {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: rgb(220, 0, 78);
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 0.5rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 
+                0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.create:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 
+                0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }

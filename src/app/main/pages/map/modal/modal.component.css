@@ -11,25 +11,64 @@
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: white;
     width: 20%;
     margin: 20vh auto 0 auto;
 }
-.modal-header{
+.modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 5%;
+    border-bottom: 1px solid #ccc;
 }
-.close{
+.close {
     text-align: center;
-    background-image: url('src/assets/icons/close-24px.svg');
+    background-image: url("src/assets/icons/close-24px.svg");
     background-size: contain;
-    height: 1.1rem;
-    width: 1.1rem;
+    background-repeat: no-repeat;
+    height: 1.3rem;
+    width: 1.3rem;
     display: inline-block;
     cursor: pointer;
 }
-.modal-body ul{
+.modal-body{
+    padding-bottom: 5%;
+}
+.modal-body ul {
+    padding: 0;
     list-style: none;
+    width: 90%;
+    margin: 0 auto;
+}
+li {
+    margin-top: 1rem;
+}
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+.create {
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: #1976d2;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 0.5rem 0.4rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+.create:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }

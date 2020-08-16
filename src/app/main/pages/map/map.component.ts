@@ -26,7 +26,6 @@ export class MapComponent implements OnInit {
 
   deleteObjectFromMap(event) {
     const objectId = event.target.dataset.id
-    console.log(objectId)
     this.API.deleteObject(objectId)
   }
 
