@@ -10,6 +10,8 @@ import { ModalService } from '../shared/modal.service';
 export class MapObjectsComponent implements OnInit {
 
   @Input() objects: any[] = []
+  
+  title: string = ''
 
   constructor(private API: ApiService, private modalService: ModalService) { }
 

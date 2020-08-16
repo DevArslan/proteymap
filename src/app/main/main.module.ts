@@ -9,6 +9,7 @@ import { ModalComponent } from './pages/map/modal/modal.component';
 
 import { ModalService } from "./pages/map/shared/modal.service";
 import { ApiService } from "./shared/api.service";
+import { ObjectsFilterPipe } from './pipes/objects-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ApiService } from "./shared/api.service";
     MapComponent,
     MapObjectsComponent,
     ModalComponent,
+    ObjectsFilterPipe,
   ],
   imports: [FormsModule, CommonModule, MainRoutingModule],
   providers: [ApiService, ModalService],
