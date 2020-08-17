@@ -25,28 +25,6 @@ export class MapComponent implements OnInit {
   constructor(private API: ApiService, private modalService: ModalService) { }
 
   selectMarker(event) {
-    const defaultIcon = L.icon({
-      iconUrl: blueIcon,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
-    const selectedIcon = L.icon({
-      iconUrl: redIcon,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
-
-    this.markers.forEach((marker) => {
-      marker.setIcon(defaultIcon)
-    })
-
-    event.target.setIcon(selectedIcon)
-
     const popup = event.target.getPopup();
     const content = popup.getContent();
     const re = /\d+/;
@@ -78,6 +56,14 @@ export class MapComponent implements OnInit {
       shadowSize: [41, 41]
     });
 
+    const selectedIcon = L.icon({
+      iconUrl: redIcon,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
     const map = L.map('map')
       .setView([51.505, -0.09], 13);
 
@@ -102,22 +88,7 @@ export class MapComponent implements OnInit {
     })
 
     this.API.id$.subscribe((id) => {
-      const defaultIcon = L.icon({
-        iconUrl: blueIcon,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-
-      const selectedIcon = L.icon({
-        iconUrl: redIcon,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-      });
-
+      
       const re = /\d+/;
 
       this.markers.forEach((marker) => {
@@ -126,6 +97,7 @@ export class MapComponent implements OnInit {
         const currentId = content.match(re)
         if (currentId == id) {
           marker.setIcon(selectedIcon)
+          map.flyTo(marker.getLatLng());
         }else{
           marker.setIcon(defaultIcon)
         }
