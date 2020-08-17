@@ -16,6 +16,7 @@ export class ApiService {
     { 'id': 7, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 }]
 
   objects$ = new Subject<any>()
+  id$ = new Subject<number>()
 
   constructor() { }
 
@@ -42,5 +43,10 @@ export class ApiService {
     }
     this.objects.push(object)
     this.objects$.next(this.objects)
+  }
+
+  selectObject(id){
+    console.log(id)
+    this.id$.next(id)
   }
 }

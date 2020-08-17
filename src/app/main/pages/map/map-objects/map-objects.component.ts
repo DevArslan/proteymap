@@ -21,11 +21,24 @@ export class MapObjectsComponent implements OnInit {
   }
 
   create() {
-    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: {coordinates:{latitude: 0, longitude:0}} })
+    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: {coordinates:{latitude: 0, longitude:0}}})
+  }
+  
+  select(event){
+    this.API.selectObject(event.currentTarget.dataset.id)
   }
 
   ngOnInit(): void {
-    console.log(this.objects)
+    this.API.id$.subscribe((id)=>{
+      const objectRows = document.getElementsByClassName('row')
+      for (let index = 0; index < objectRows.length; index++) {
+        const row = <HTMLElement>objectRows[index];
+        row.classList.remove('row--selected')
+        if(Number(row.dataset.id) == id){
+          row.classList.add('row--selected')
+        }
+      }
+    })
   }
 
 }

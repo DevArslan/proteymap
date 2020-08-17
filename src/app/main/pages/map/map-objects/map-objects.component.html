@@ -31,7 +31,7 @@
                                 <col width="25%">
                                 <tbody>
                                     <tr class="row" *ngFor="let object of objects | objectsFilter: title"
-                                        attr.data-id={{object.id}}>
+                                        attr.data-id={{object.id}} (click)="select($event)">
                                         <td>{{object.title}}</td>
                                         <td>{{object.latitude}}</td>
                                         <td>{{object.longitude}}</td>
