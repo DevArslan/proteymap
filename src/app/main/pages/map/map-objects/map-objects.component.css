@@ -13,6 +13,7 @@ table {
     border: 1px solid #ccc;
     text-align: left;
     font-size: 1.1rem;
+    word-break: break-word
 }
 .table-header tr :nth-child(4) {
     text-align: center;

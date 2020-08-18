@@ -113,3 +113,9 @@ input[type="text"] {
     padding-left: 0.5rem;
     opacity: 0.8;
 }
+
+@media screen and (max-width: 768px) {
+    .modal{
+        width: 65%;
+    }
+}

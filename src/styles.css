@@ -25,4 +25,8 @@ html {
     opacity: 0;
     transition: opacity 0.25s linear;
 }
-
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 3.2vw;
+    }
+}
