@@ -47,15 +47,11 @@ export class MapObjectsComponent implements OnInit {
         }
       }
     }))
-    // this.subscription.add(this.API.objects$.subscribe(() => {
-    //   const rows = document.getElementsByClassName('row')
-    //   rows[rows.length-1].scrollIntoView()
-    // }))
-    
   }
-  ngAfterViewChecked(): void {
-    const rows = this.elementRef.nativeElement.querySelectorAll('.row');
-    rows[rows.length-1].scrollIntoView()
-  }
+  // Скролл до нового элемента в таблице
+  // ngAfterViewChecked(): void {
+  //   const rows = this.elementRef.nativeElement.querySelectorAll('.row');
+  //   rows[rows.length-1].scrollIntoView()
+  // }
 
 }
