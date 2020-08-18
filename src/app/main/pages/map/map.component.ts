@@ -15,10 +15,6 @@ export class MapComponent implements OnInit {
     if (event.target.classList.contains("delete")) { this.deleteObjectFromMap(event); }
   }
 
-  // @HostListener('document:click', ['$event']) click2(event) {
-  //   if (event.target.classList.contains("leaflet-marker-icon")) { this.deleteObjectFromMap(event); }
-  // }
-
   objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = []
   markers: any[]
 
@@ -38,8 +34,7 @@ export class MapComponent implements OnInit {
   }
 
   deleteObjectFromMap(event) {
-    const objectId = event.target.dataset.id
-    this.API.deleteObject(objectId)
+    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.dataset.id}})
   }
 
   makePopup(object) {

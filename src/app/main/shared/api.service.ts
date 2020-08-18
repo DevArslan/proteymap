@@ -1,51 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
+import objectsJSON from 'src/assets/data/objects.json';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  
-  objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = [
-    { 'id': 1, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
-    { 'id': 2, 'title': 'Второе место', 'latitude': 51.505, 'longitude': -0.11 },
-    { 'id': 3, 'title': 'Третье место', 'latitude': 51.505, 'longitude': -0.15 },
-    { 'id': 4, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
-    { 'id': 5, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
-    { 'id': 6, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 },
-    { 'id': 7, 'title': 'Первое место', 'latitude': 51.505, 'longitude': -0.09 }]
+
+  objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = []
 
   objects$ = new Subject<any>()
   id$ = new Subject<number>()
 
   constructor() { }
 
-  getObjects(){
-    this.objects$.next(this.objects)
+  getObjects() {
+    this.objects$.next(objectsJSON)
+    this.objects = objectsJSON
   }
 
-  deleteObject(id){
+  deleteObject(id) {
     console.log(id)
-    this.objects.forEach((object, index)=>{
-      if(object.id == id){
-        this.objects.splice(index,1)
+    this.objects.forEach((object, index) => {
+      if (object.id == id) {
+        this.objects.splice(index, 1)
       }
     })
     this.objects$.next(this.objects)
   }
 
-  createObject(data){
+  createObject(data) {
     const object = {
-        id: (this.objects.length + 1),
-        title: data.title,
-        latitude: data.latitude,
-        longitude: data.longitude
+      id: (this.objects.length + 1),
+      title: data.title,
+      latitude: data.latitude,
+      longitude: data.longitude
     }
     this.objects.push(object)
     this.objects$.next(this.objects)
   }
 
-  selectObject(id){
+  selectObject(id) {
     console.log(id)
     this.id$.next(id)
   }

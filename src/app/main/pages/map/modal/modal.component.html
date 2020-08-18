@@ -5,7 +5,7 @@
             <i class="close" (click)="close()"></i>
         </div>
         <div class="modal-body">
-            <form action="create()">
+            <form action="create()" *ngIf="data.type == 'create'">
                 <ul>
                     <li><input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title"></li>
                     <li><input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude"></li>
@@ -13,6 +13,10 @@
                     <li><input type="submit" value="Создать" (click)="create()" class="create"></li>
                 </ul>
             </form>
+            <div *ngIf="data.type == 'delete'" class="delete">
+                <button class="delete-button" (click)="delete()">Удалить</button>
+                <button class="cancel-button" (click)="close()">Отмена</button>
+            </div>
         </div>
     </div>
 </div>

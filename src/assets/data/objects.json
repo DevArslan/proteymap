@@ -1,0 +1,5 @@
+[
+      { "id": 1, "title": "Первое место", "latitude": 51.505, "longitude": -0.09 },
+      { "id": 2, "title": "Второе место", "latitude": 51.505, "longitude": -0.11 },
+      { "id": 3, "title": "Третье место", "latitude": 51.505, "longitude": -0.15 }
+]

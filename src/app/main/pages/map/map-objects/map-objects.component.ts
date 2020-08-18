@@ -16,8 +16,8 @@ export class MapObjectsComponent implements OnInit {
   constructor(private API: ApiService, private modalService: ModalService) { }
 
   delete(event) {
-    const objectId = event.target.parentElement.parentElement.dataset.id
-    this.API.deleteObject(objectId)
+    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.parentElement.parentElement.dataset.id}})
+    event.stopPropagation()
   }
 
   create() {
