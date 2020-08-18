@@ -7,9 +7,18 @@
         <div class="modal-body">
             <form action="create()" *ngIf="data.type == 'create'">
                 <ul>
-                    <li><input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title"></li>
-                    <li><input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude"></li>
-                    <li><input type="text" name="longitude" placeholder="Долгота" [(ngModel)]="longitude"></li>
+                    <li>
+                        <input type="text" name="title" placeholder="Название объекта" [(ngModel)]="title">
+                        <p class="error">{{error.title}}</p>
+                    </li>
+                    <li>
+                        <input type="text" name="latitude" placeholder="Широта" [(ngModel)]="latitude">
+                        <p class="error">{{error.latitude}}</p>
+                    </li>
+                    <li>
+                        <input type="text" name="longitude" placeholder="Долгота" [(ngModel)]="longitude">
+                        <p class="error">{{error.longitude}}</p>
+                    </li>
                     <li><input type="submit" value="Создать" (click)="create()" class="create"></li>
                 </ul>
             </form>

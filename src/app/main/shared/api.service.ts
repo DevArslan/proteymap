@@ -19,7 +19,6 @@ export class ApiService {
   }
 
   deleteObject(id) {
-    console.log(id)
     this.objects.forEach((object, index) => {
       if (object.id == id) {
         this.objects.splice(index, 1)
@@ -40,7 +39,6 @@ export class ApiService {
   }
 
   selectObject(id) {
-    console.log(id)
     this.id$.next(id)
   }
 }

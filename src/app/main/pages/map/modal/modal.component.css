@@ -33,7 +33,7 @@
     display: inline-block;
     cursor: pointer;
 }
-.modal-body{
+.modal-body {
     padding-bottom: 5%;
 }
 .modal-body ul {
@@ -72,14 +72,14 @@ input[type="text"] {
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
         0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
-.delete{
+.delete {
     width: 60%;
     margin: 1rem auto 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.delete button{
+.delete button {
     cursor: pointer;
     outline: none;
     border: none;
@@ -89,14 +89,23 @@ input[type="text"] {
     font-size: 0.75rem;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
-.delete button:hover{
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+.delete button:hover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
-.delete-button{
+.delete-button {
     background-color: #1976d2;
 }
-.cancel-button{
+.cancel-button {
     background-color: rgb(220, 0, 78);
+}
+.error {
+    margin: 0;
+    color: rgb(220, 0, 78);
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    opacity: 0.8;
 }
