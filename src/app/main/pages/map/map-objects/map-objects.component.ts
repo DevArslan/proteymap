@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from "../../../shared/api.service";
 import { ModalService } from '../shared/modal.service';
@@ -16,7 +16,7 @@ export class MapObjectsComponent implements OnInit {
   
   title: string = ''
 
-  constructor(private API: ApiService, private modalService: ModalService) { }
+  constructor(private API: ApiService, private modalService: ModalService, private elementRef: ElementRef) { }
 
   delete(event) {
     this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.parentElement.parentElement.dataset.id}})
@@ -43,9 +43,19 @@ export class MapObjectsComponent implements OnInit {
         row.classList.remove('row--selected')
         if(Number(row.dataset.id) == id){
           row.classList.add('row--selected')
+          row.scrollIntoView()
         }
       }
     }))
+    // this.subscription.add(this.API.objects$.subscribe(() => {
+    //   const rows = document.getElementsByClassName('row')
+    //   rows[rows.length-1].scrollIntoView()
+    // }))
+    
+  }
+  ngAfterViewChecked(): void {
+    const rows = this.elementRef.nativeElement.querySelectorAll('.row');
+    rows[rows.length-1].scrollIntoView()
   }
 
 }
