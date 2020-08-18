@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs';
 import L from "leaflet";
 import { ApiService } from "../../shared/api.service";
 import { ModalService } from "./shared/modal.service";
@@ -14,6 +15,8 @@ export class MapComponent implements OnInit {
   @HostListener('document:click', ['$event']) click(event) {
     if (event.target.classList.contains("delete")) { this.deleteObjectFromMap(event); }
   }
+
+  private subscription: Subscription = new Subscription();
 
   objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = []
   markers: any[]
@@ -39,6 +42,10 @@ export class MapComponent implements OnInit {
 
   makePopup(object) {
     return (`<div><p>${object.title}</p><button class="delete" data-id =${object.id}>Удалить</button></div>`)
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -72,7 +79,7 @@ export class MapComponent implements OnInit {
 
     this.markers = markersLayer._layers
 
-    this.API.objects$.subscribe((objects) => {
+    this.subscription.add(this.API.objects$.subscribe((objects) => {
       markersLayer.clearLayers();
       this.objects = objects
       this.objects.forEach((object) => {
@@ -80,12 +87,10 @@ export class MapComponent implements OnInit {
         marker.bindPopup(this.makePopup(object))
       })
       this.markers = Object.values(markersLayer._layers)
-    })
+    }))
 
-    this.API.id$.subscribe((id) => {
-      
+    this.subscription.add(this.API.id$.subscribe((id) => {
       const re = /\d+/;
-
       this.markers.forEach((marker) => {
         const popup = marker.getPopup();
         const content = popup.getContent();
@@ -97,7 +102,7 @@ export class MapComponent implements OnInit {
           marker.setIcon(defaultIcon)
         }
       })
-    })
+    }))
 
     this.API.getObjects()
 

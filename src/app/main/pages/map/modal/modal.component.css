@@ -32,6 +32,10 @@
     width: 1.3rem;
     display: inline-block;
     cursor: pointer;
+    opacity: 0.6;
+}
+.close:hover{
+    opacity: 1;
 }
 .modal-body {
     padding-bottom: 5%;

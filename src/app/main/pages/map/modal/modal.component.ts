@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ModalService } from "../shared/modal.service";
 import { ApiService } from "../../../shared/api.service";
 
@@ -8,6 +9,8 @@ import { ApiService } from "../../../shared/api.service";
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
+
+  private subscription: Subscription = new Subscription();
 
   data: { type: string, title: string, state: boolean, data: any } = { type: '', title: '', state: false, data: { coordinates: { lat: 0, lng: 0 }, id: null } }
 
@@ -68,14 +71,17 @@ export class ModalComponent implements OnInit {
     this.error = { title: '', latitude: '', longitude: '' }
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.modalService.data$.subscribe((data) => {
+    this.subscription.add(this.modalService.data$.subscribe((data) => {
       this.data = data
       if (data.type == 'create') {
         this.latitude = data.data.coordinates.lat
         this.longitude = data.data.coordinates.lng
       }
-    })
+    }))
   }
-
 }

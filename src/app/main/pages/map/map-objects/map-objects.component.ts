@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ApiService } from "../../../shared/api.service";
 import { ModalService } from '../shared/modal.service';
 
@@ -10,6 +11,8 @@ import { ModalService } from '../shared/modal.service';
 export class MapObjectsComponent implements OnInit {
 
   @Input() objects: any[] = []
+
+  private subscription: Subscription = new Subscription();
   
   title: string = ''
 
@@ -28,8 +31,12 @@ export class MapObjectsComponent implements OnInit {
     this.API.selectObject(event.currentTarget.dataset.id)
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   ngOnInit(): void {
-    this.API.id$.subscribe((id)=>{
+    this.subscription.add(this.API.id$.subscribe((id)=>{
       const objectRows = document.getElementsByClassName('row')
       for (let index = 0; index < objectRows.length; index++) {
         const row = <HTMLElement>objectRows[index];
@@ -38,7 +45,7 @@ export class MapObjectsComponent implements OnInit {
           row.classList.add('row--selected')
         }
       }
-    })
+    }))
   }
 
 }
