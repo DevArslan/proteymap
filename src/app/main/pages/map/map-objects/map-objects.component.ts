@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, SimpleChange} from '@angular/core';
 import { Subscription, fromEvent } from 'rxjs';
 import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { ApiService } from "../../../shared/api.service";
@@ -15,21 +15,21 @@ export class MapObjectsComponent implements OnInit {
   @Input() objects: any[] = []
 
   private subscription: Subscription = new Subscription();
-  
+
   title: string = ''
 
   constructor(private API: ApiService, private modalService: ModalService) { }
 
   delete(event) {
-    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.parentElement.parentElement.dataset.id}})
+    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: { id: event.target.parentElement.parentElement.dataset.id } })
     event.stopPropagation()
   }
 
   create() {
-    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: {coordinates:{latitude: 0, longitude:0}}})
+    this.modalService.data$.next({ type: 'create', title: 'Добавить объект', state: true, data: { coordinates: { latitude: 0, longitude: 0 } } })
   }
-  
-  select(event){
+
+  select(event) {
     this.API.selectObject(event.currentTarget.dataset.id)
   }
 
@@ -38,12 +38,12 @@ export class MapObjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription.add(this.API.id$.subscribe((id)=>{
+    this.subscription.add(this.API.id$.subscribe((id) => {
       const objectRows = document.getElementsByClassName('row')
       for (let index = 0; index < objectRows.length; index++) {
         const row = <HTMLElement>objectRows[index];
         row.classList.remove('row--selected')
-        if(Number(row.dataset.id) == id){
+        if (Number(row.dataset.id) == id) {
           row.classList.add('row--selected')
           row.scrollIntoView()
         }

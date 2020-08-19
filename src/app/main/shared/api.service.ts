@@ -8,6 +8,7 @@ import { ObjectsFilterPipe } from "../pipes/objects-filter.pipe";
 export class ApiService {
 
   objects: { 'id': number, 'title': string, 'latitude': number, 'longitude': number }[] = []
+  filterInput = ''
 
   objects$ = new Subject<any>()
   id$ = new Subject<number>()
@@ -25,7 +26,7 @@ export class ApiService {
         this.objects.splice(index, 1)
       }
     })
-    this.objects$.next(this.objects)
+    this.objects$.next(this.objectsFilter.transform(this.objects,this.filterInput))
   }
 
   createObject(data) {
@@ -36,10 +37,11 @@ export class ApiService {
       longitude: data.longitude
     }
     this.objects.push(object)
-    this.objects$.next(this.objects)
+    this.objects$.next(this.objectsFilter.transform(this.objects,this.filterInput))
   }
 
   filterObjects(title) {
+    this.filterInput = title
     this.objects$.next(this.objectsFilter.transform(this.objects,title))
   }
 
