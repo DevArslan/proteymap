@@ -40,6 +40,7 @@ export class MapComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.map.nativeElement.removeEventListener('click')
   }
 
   ngOnInit(): void {    
