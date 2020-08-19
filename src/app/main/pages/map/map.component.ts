@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import L from "leaflet";
 import { ApiService } from "../../shared/api.service";
@@ -12,9 +12,7 @@ import blueIcon from 'src/assets/icons/room-blue-48dp.svg'
 })
 export class MapComponent implements OnInit {
 
-  @HostListener('document:click', ['$event']) click(event) {
-    if (event.target.classList.contains("delete")) { this.deleteObjectFromMap(event); }
-  }
+  @ViewChild('map') map: ElementRef;
 
   private subscription: Subscription = new Subscription();
 
@@ -37,18 +35,18 @@ export class MapComponent implements OnInit {
   }
 
   deleteObjectFromMap(event) {
-    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.dataset.id}})
+    this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: { id: event.target.dataset.id } })
   }
 
   makePopup(object) {
-    return (`<div><p>${object.title}</p><button class="delete" data-id =${object.id}>Удалить</button></div>`)
+    return (`<div><p>${object.title}</p><button class="delete" id="delete" data-id =${object.id}>Удалить</button></div>`)
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
 
     const defaultIcon = L.icon({
       iconUrl: blueIcon,
@@ -98,13 +96,19 @@ export class MapComponent implements OnInit {
         if (currentId == id) {
           marker.setIcon(selectedIcon)
           map.flyTo(marker.getLatLng());
-        }else{
+        } else {
           marker.setIcon(defaultIcon)
         }
       })
     }))
 
     this.API.getObjects()
-
+  }
+  ngAfterViewInit(): void{
+    this.map.nativeElement.addEventListener('click', (event) => {
+      if (event.target.id == "delete") {
+        this.deleteObjectFromMap(event);
+      }
+    })
   }
 }
