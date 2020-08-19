@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
+import { Subscription, fromEvent } from 'rxjs';
+import { filter, debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { ApiService } from "../../../shared/api.service";
 import { ModalService } from '../shared/modal.service';
 
@@ -10,13 +11,14 @@ import { ModalService } from '../shared/modal.service';
 })
 export class MapObjectsComponent implements OnInit {
 
+  @ViewChild('titleInput') titleInput: ElementRef;
   @Input() objects: any[] = []
 
   private subscription: Subscription = new Subscription();
   
   title: string = ''
 
-  constructor(private API: ApiService, private modalService: ModalService, private elementRef: ElementRef) { }
+  constructor(private API: ApiService, private modalService: ModalService) { }
 
   delete(event) {
     this.modalService.data$.next({ type: 'delete', title: 'Удалить объект', state: true, data: {id: event.target.parentElement.parentElement.dataset.id}})
@@ -48,10 +50,18 @@ export class MapObjectsComponent implements OnInit {
       }
     }))
   }
-  // Скролл до нового элемента в таблице
-  // ngAfterViewChecked(): void {
-  //   const rows = this.elementRef.nativeElement.querySelectorAll('.row');
-  //   rows[rows.length-1].scrollIntoView()
-  // }
 
+  ngAfterViewInit() {
+    fromEvent(this.titleInput.nativeElement, 'keyup')
+      .pipe(
+        filter(Boolean),
+        debounceTime(250),
+        distinctUntilChanged(),
+        tap(async (event) => {
+          const title = <HTMLInputElement>this.titleInput.nativeElement.value
+          this.API.filterObjects(title)
+        })
+      )
+      .subscribe();
+  }
 }

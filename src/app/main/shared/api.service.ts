@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import objectsJSON from 'src/assets/data/objects.json';
+import { ObjectsFilterPipe } from "../pipes/objects-filter.pipe";
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class ApiService {
   objects$ = new Subject<any>()
   id$ = new Subject<number>()
 
-  constructor() { }
+  constructor(private objectsFilter: ObjectsFilterPipe) { }
 
   getObjects() {
     this.objects$.next(objectsJSON)
@@ -36,6 +37,10 @@ export class ApiService {
     }
     this.objects.push(object)
     this.objects$.next(this.objects)
+  }
+
+  filterObjects(title) {
+    this.objects$.next(this.objectsFilter.transform(this.objects,title))
   }
 
   selectObject(id) {

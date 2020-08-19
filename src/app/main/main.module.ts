@@ -20,7 +20,7 @@ import { ObjectsFilterPipe } from './pipes/objects-filter.pipe';
     ObjectsFilterPipe,
   ],
   imports: [FormsModule, CommonModule, MainRoutingModule],
-  providers: [ApiService, ModalService],
+  providers: [ApiService, ModalService, ObjectsFilterPipe],
   bootstrap: [MainComponent],
 })
 export class MainModule { }
