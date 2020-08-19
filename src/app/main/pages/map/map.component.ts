@@ -22,11 +22,7 @@ export class MapComponent implements OnInit {
   constructor(private API: ApiService, private modalService: ModalService) { }
 
   selectMarker(event) {
-    const popup = event.target.getPopup();
-    const content = popup.getContent();
-    const re = /\d+/;
-    const id = content.match(re)
-    this.API.selectObject(id[0])
+    this.API.selectObject(event.target.id)
   }
 
   createObjectOnMap(event) {
@@ -83,17 +79,14 @@ export class MapComponent implements OnInit {
       this.objects.forEach((object) => {
         var marker = L.marker([object.latitude, object.longitude], { icon: defaultIcon }).addTo(markersLayer).on('click', this.selectMarker.bind(this));
         marker.bindPopup(this.makePopup(object))
+        marker.id = object.id
       })
       this.markers = Object.values(markersLayer._layers)
     }))
 
     this.subscription.add(this.API.id$.subscribe((id) => {
-      const re = /\d+/;
       this.markers.forEach((marker) => {
-        const popup = marker.getPopup();
-        const content = popup.getContent();
-        const currentId = content.match(re)
-        if (currentId == id) {
+        if (marker.id == id) {
           marker.setIcon(selectedIcon)
           map.flyTo(marker.getLatLng());
         } else {
